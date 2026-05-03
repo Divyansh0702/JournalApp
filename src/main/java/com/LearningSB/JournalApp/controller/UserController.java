@@ -23,9 +23,9 @@ public class UserController {
         return userService.getAll();
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> getUsersByUsername(@PathVariable String username){
-        User user = userService.findByUserName(username);
+    @GetMapping("/{userName}")
+    public ResponseEntity<?> getUsersByUsername(@PathVariable String userName){
+        User user = userService.findByUserName(userName);
 
         if(user != null){
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -39,9 +39,9 @@ public class UserController {
         userService.saveUser(user);
     }
 
-    @PutMapping("/{username}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String username){
-        User userInDB = userService.findByUserName(username);
+    @PutMapping("/{userName}")
+    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName){
+        User userInDB = userService.findByUserName(userName);
         if(userInDB != null){
             userInDB.setUserName(user.getUserName());
             userInDB.setPassword(user.getPassword());
