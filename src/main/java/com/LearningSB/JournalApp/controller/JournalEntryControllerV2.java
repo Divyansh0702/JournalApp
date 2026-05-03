@@ -19,7 +19,7 @@ public class JournalEntryControllerV2 {
     private JournalEntryService journalEntryService;
 
     @GetMapping
-    public List<JournalEntry> getAll(){
+    public List<JournalEntry> getAllEntries(){
         return journalEntryService.getAll();
     }
 
