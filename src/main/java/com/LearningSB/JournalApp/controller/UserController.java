@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<?> getUsersByUsername(@PathVariable String userName){
+    public ResponseEntity<?> getUserByUsername(@PathVariable String userName){
         User user = userService.findByUserName(userName);
 
         if(user != null){
