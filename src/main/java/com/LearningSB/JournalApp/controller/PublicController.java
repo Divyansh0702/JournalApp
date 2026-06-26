@@ -15,6 +15,11 @@ public class PublicController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/health-check")
+    public ResponseEntity<?> healthCheck(){
+        return new ResponseEntity<>("Public API is working", HttpStatus.OK);
+    }
+
     @PostMapping("/create-user")
     public ResponseEntity<?> createUser(@RequestBody User user){
         userService.saveUser(user);
