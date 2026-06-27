@@ -30,6 +30,26 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User saveAdmin(User user){
+
+        if (user.getPassword() != null && !user.getPassword().matches("^\\$2[aby]\\$.+")) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles(Arrays.asList("USER", "ADMIN"));
+        }
+        return userRepository.save(user);
+    }
+
+    public User saveAdminUserName(User user){
+        List<String> roles = user.getRoles();
+        if(!roles.contains("ADMIN")){
+            roles.add("ADMIN");
+        }
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
+
     public List<User> getAll(){
         return userRepository.findAll();
     }

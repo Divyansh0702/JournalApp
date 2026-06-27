@@ -22,8 +22,8 @@ public class PublicController {
 
     @PostMapping("/create-user")
     public ResponseEntity<?> createUser(@RequestBody User user){
-        userService.saveUser(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        User saved = userService.saveUser(user);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
 
