@@ -1,5 +1,6 @@
 package com.LearningSB.JournalApp.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Document
 @Data
+@Builder
 public class User {
     @Id
     private ObjectId id;
@@ -27,5 +29,6 @@ public class User {
     private List<String> roles;
 
     @DBRef
+    @Builder.Default
     private List<JournalEntry> journalEntries = new ArrayList<>();
 }
