@@ -1,0 +1,15 @@
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://divyansh07020_db_user:Zy034t9L6Byj59b4@cluster0.zoaol10.mongodb.net/journaldb?retryWrites=true&w=majority
+#      database: journaldb
+#      auto-index-creation: true
+#
+#server:
+#  port: 8082
+#  servlet:
+#    context-path: /journal
+
+spring:
+  profiles:
+    active: dev
