@@ -26,5 +26,9 @@ public class PublicController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    @PostMapping("/create-user-logger")
+    public boolean createUserViaLogger(@RequestBody User user){
+        return userService.saveUserViaLogger(user);
+    }
 
 }
