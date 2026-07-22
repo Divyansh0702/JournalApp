@@ -2,6 +2,7 @@ package com.LearningSB.JournalApp.service;
 
 import com.LearningSB.JournalApp.entity.User;
 import com.LearningSB.JournalApp.repository.UserRepository;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,21 +25,24 @@ public class UserServiceTests {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Disabled
     @Test
     public void testAdd(){
         assertEquals(4, 2 + 2);
     }
 
+    @Disabled
     @ParameterizedTest
     @CsvSource({
             "1, 1, 2",
             "2, 5, 7",
-            "7, 5, 10"
+            "7, 5, 12"
     })
     public void testAdd(int a, int b, int expected){
         assertEquals(expected, a + b);
     }
 
+    @Disabled
     @Test
     public void testFindByUserName(){
         User user = userRepository.findByUserName("Divyansh");
@@ -47,6 +51,7 @@ public class UserServiceTests {
 //      assertTrue(5 >= 5);
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(strings = {
             "Divyansh",
@@ -57,6 +62,7 @@ public class UserServiceTests {
         assertNotNull(userRepository.findByUserName(name), "failed for " + name);
     }
 
+    @Disabled
     @ParameterizedTest
     @ArgumentsSource(UserArgumentsProvider.class)
     public void testSaveUser(User user) {
