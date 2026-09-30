@@ -1,7 +1,10 @@
 package com.LearningSB.JournalApp.controller;
 
+import com.LearningSB.JournalApp.api.response.WeatherResponse;
 import com.LearningSB.JournalApp.entity.User;
+import com.LearningSB.JournalApp.service.QuotesService;
 import com.LearningSB.JournalApp.service.UserService;
+import com.LearningSB.JournalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WeatherService weatherService;
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user){
@@ -38,6 +44,18 @@ public class UserController {
         Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
         userService.deleteByUserName(authentication.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greetings(){
+        Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherRespoonse = weatherService.getWeather("Noida");
+
+        String greeting = "";
+        if(weatherRespoonse != null){
+            greeting = ". Today's temperature in Noida is " + weatherRespoonse.getCurrent().getFeelslike() + "°C with " + weatherRespoonse.getCurrent().getWeather_descriptions().get(0) + " weather.";
+        }
+        return new ResponseEntity<>("Hello, " + authentication.getName() + greeting ,HttpStatus.OK);
     }
 
 // For Admin Only:
