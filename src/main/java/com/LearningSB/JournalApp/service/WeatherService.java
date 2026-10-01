@@ -9,21 +9,42 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+//@Service
+//public class WeatherService {
+//
+//    @Value("${weather.api.key}")
+//    private String apiKey;
+//    private static final String API = "https://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+//
+//    @Autowired
+//    private RestTemplate restTemplate;
+//
+//    public WeatherResponse getWeather(String city) {
+//        String finalAPI = API.replace("API_KEY", apiKey).replace("CITY", city);
+//        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+//        WeatherResponse body = response.getBody();
+//        return body;
+//    }
+//
+//}
+
+
 @Service
 public class WeatherService {
+    private static final String API =
+            "https://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
 
-    @Value("${weather.api.key}")
-    private String apiKey;
-    private static final String API = "https://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+    private final RestTemplate restTemplate;
+    private final String apiKey;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    public WeatherResponse getWeather(String city) {
-        String finalAPI = API.replace("API_KEY", apiKey).replace("CITY", city);
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
-        WeatherResponse body = response.getBody();
-        return body;
+    public WeatherService(RestTemplate restTemplate, @Value("${weather.api.key}") String apiKey) {
+        this.restTemplate = restTemplate;
+        this.apiKey = apiKey;
     }
 
+    public WeatherResponse getWeather(String city) {
+        String finalApi = API.replace("API_KEY", apiKey).replace("CITY", city);
+
+        return restTemplate.getForEntity(finalApi, WeatherResponse.class).getBody();
+    }
 }
