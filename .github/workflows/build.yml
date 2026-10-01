@@ -34,8 +34,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           WEATHER_API_KEY: test-key
-<<<<<<< HEAD
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=learningsb_journalapp -Dweather.api.key="${WEATHER_API_KEY}"
-=======
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=learningsb_journalapp -Dweather.api.key="${WEATHER_API_KEY}"
->>>>>>> 99a591d (Using App Cache)
